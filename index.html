@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diário de Bordo</title>
+    <meta name="description" content="Aplicativo para registro de atividades diárias">
+    <meta name="theme-color" content="#2c3e50">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Diário de Bordo</h1>
+            <p class="subtitle">Registre suas atividades diárias</p>
+            <div class="pwa-info">
+                <button id="installBtn" class="install-btn" style="display:none;">
+                    📲 Instalar App
+                </button>
+                <div class="offline-status" id="offlineStatus">
+                    <span class="online">● Online</span>
+                </div>
+                <div id="swStatus" class="sw-status" style="display: none;">
+                    ✓ Offline Disponível
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class="entry-form">
+                <h2>Nova Entrada</h2>
+                <form id="entryForm">
+                    <div class="form-group">
+                        <label for="title">Título *</label>
+                        <input type="text" id="title" placeholder="Ex: Reunião de equipe" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Descrição *</label>
+                        <textarea id="description" rows="4" placeholder="Descreva sua atividade..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Data *</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            💾 Salvar Entrada
+                        </button>
+                        <button type="button" id="clearBtn" class="btn btn-secondary">
+                            🗑️ Limpar
+                        </button>
+                    </div>
+                    <p class="form-help">* Campos obrigatórios</p>
+                </form>
+            </section>
+
+            <section class="entries-list">
+                <div class="section-header">
+                    <h2>Entradas Registradas</h2>
+                    <div class="entry-count">
+                        <span id="entryCount">0</span> entradas
+                    </div>
+                </div>
+                
+                <div id="entriesContainer" class="entries-container">
+                    <!-- Entradas serão carregadas aqui dinamicamente -->
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-icon">📝</div>
+                        <p>Nenhuma entrada registrada ainda.</p>
+                        <p>Comece adicionando uma nova entrada acima!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Diário de Bordo PWA • Funciona offline • Dados salvos localmente</p>
+            <p class="storage-info">
+                <span id="storageStatus">Armazenamento local disponível</span>
+                <button id="debugBtn" class="debug-btn" title="Debug">🐛</button>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Modal de confirmação para exclusão -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <h3>Confirmar Exclusão</h3>
+            <p>Tem certeza que deseja excluir esta entrada?</p>
+            <div class="modal-actions">
+                <button id="cancelDelete" class="btn btn-secondary">Cancelar</button>
+                <button id="confirmDelete" class="btn btn-danger">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Debug -->
+    <div id="debugModal" class="modal">
+        <div class="modal-content debug-modal">
+            <h3>🔧 Debug do PWA</h3>
+            <div class="debug-info">
+                <h4>Status do Service Worker:</h4>
+                <pre id="swDebugInfo">Carregando...</pre>
+                
+                <h4>Cache Status:</h4>
+                <pre id="cacheDebugInfo">Carregando...</pre>
+                
+                <h4>Dados Locais:</h4>
+                <pre id="dataDebugInfo">Carregando...</pre>
+            </div>
+            <div class="debug-actions">
+                <button id="clearCacheBtn" class="btn btn-secondary">Limpar Cache</button>
+                <button id="unregisterSWBtn" class="btn btn-secondary">Remover Service Worker</button>
+                <button id="closeDebugBtn" class="btn btn-primary">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
