@@ -36,4 +36,3 @@ Um aplicativo web progressivo (PWA) para registro de atividades diárias que fun
 - ✅ Ícones responsivos
 - ✅ Tema color personalizado
 
-## 🏗️ Estrutura do Projeto
